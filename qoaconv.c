@@ -1,6 +1,7 @@
 /*
 
 Copyright (c) 2023, Dominic Szablewski - https://phoboslab.org
+Modifed by Taha Rashid (TheBossT910 / thebosst)
 SPDX-License-Identifier: MIT
 
 
@@ -11,7 +12,7 @@ Define QOACONV_HAS_DRMP3 and QOACONV_HAS_DRFLAC for MP3 and FLAC support
  -"dr_flac.h" (https://github.com/mackron/dr_libs/blob/master/dr_flac.h)
 
 Compile with: 
-	gcc qoaconv.c -std=gnu99 -lm -O3 -o qoaconv
+	make qoaconv
 
 */
 
@@ -21,17 +22,13 @@ Compile with:
 #include <string.h>
 #include <time.h>
 
-#ifdef QOACONV_HAS_DRMP3
-	/* https://github.com/mackron/dr_libs/blob/master/dr_mp3.h */
-	#define DR_MP3_IMPLEMENTATION
-	#include "dr_mp3.h"
-#endif
+/* https://github.com/mackron/dr_libs/blob/master/dr_mp3.h */
+#define DR_MP3_IMPLEMENTATION
+#include "libs/dr_libs/dr_mp3.h"
 
-#ifdef QOACONV_HAS_DRFLAC
-	/* https://github.com/mackron/dr_libs/blob/master/dr_flac.h */
-	#define DR_FLAC_IMPLEMENTATION
-	#include "dr_flac.h"
-#endif
+/* https://github.com/mackron/dr_libs/blob/master/dr_flac.h */
+#define DR_FLAC_IMPLEMENTATION
+#include "libs/dr_libs/dr_flac.h"
 
 #define QOA_IMPLEMENTATION
 #define QOA_RECORD_TOTAL_ERROR
@@ -188,42 +185,38 @@ short *qoaconv_wav_read(const char *path, qoa_desc *desc) {
 /* -----------------------------------------------------------------------------
 	MP3 decode wrapper */
 
-#ifdef QOACONV_HAS_DRMP3
-	short *qoaconv_mp3_read(const char *path, qoa_desc *desc) {
-		drmp3_uint64 samples;
+short *qoaconv_mp3_read(const char *path, qoa_desc *desc) {
+	drmp3_uint64 samples;
 
-		drmp3_config mp3;
-		short* sample_data = drmp3_open_file_and_read_pcm_frames_s16(path, &mp3, &samples, NULL);
-		QOACONV_ASSERT(sample_data, "Can't decode MP3");
+	drmp3_config mp3;
+	short* sample_data = drmp3_open_file_and_read_pcm_frames_s16(path, &mp3, &samples, NULL);
+	QOACONV_ASSERT(sample_data, "Can't decode MP3");
 
-		desc->samplerate = mp3.sampleRate;
-		desc->channels = mp3.channels;
-		desc->samples = samples;
+	desc->samplerate = mp3.sampleRate;
+	desc->channels = mp3.channels;
+	desc->samples = samples;
 
-		return sample_data;
-	}
-#endif
+	return sample_data;
+}
 
 
 
 /* -----------------------------------------------------------------------------
 	FLAC decode wrapper */
 
-#ifdef QOACONV_HAS_DRFLAC
-	short *qoaconv_flac_read(const char *path, qoa_desc *desc) {
-		unsigned int channels;
-		unsigned int samplerate;
-		drflac_uint64 samples;
-		short* sample_data = drflac_open_file_and_read_pcm_frames_s16(path, &channels, &samplerate, &samples, NULL);
-		QOACONV_ASSERT(sample_data, "Can't decode FLAC");
+short *qoaconv_flac_read(const char *path, qoa_desc *desc) {
+	unsigned int channels;
+	unsigned int samplerate;
+	drflac_uint64 samples;
+	short* sample_data = drflac_open_file_and_read_pcm_frames_s16(path, &channels, &samplerate, &samples, NULL);
+	QOACONV_ASSERT(sample_data, "Can't decode FLAC");
 
-		desc->samplerate = samplerate;
-		desc->channels = channels;
-		desc->samples = samples;
+	desc->samplerate = samplerate;
+	desc->channels = channels;
+	desc->samples = samples;
 
-		return sample_data;
-	}
-#endif
+	return sample_data;
+}
 
 
 
@@ -245,18 +238,10 @@ int main(int argc, char **argv) {
 		sample_data = qoaconv_wav_read(argv[1], &desc);
 	}
 	else if (QOACONV_STR_ENDS_WITH(argv[1], ".mp3")) {
-		#ifdef QOACONV_HAS_DRMP3
-			sample_data = qoaconv_mp3_read(argv[1], &desc);
-		#else
-			QOACONV_ABORT("qoaconv was not compiled with an MP3 decoder (QOACONV_HAS_DRMP3)");
-		#endif
+		sample_data = qoaconv_mp3_read(argv[1], &desc);
 	}
 	else if (QOACONV_STR_ENDS_WITH(argv[1], ".flac")) {
-		#ifdef QOACONV_HAS_DRFLAC
-			sample_data = qoaconv_flac_read(argv[1], &desc);
-		#else
-			QOACONV_ABORT("qoaconv was not compiled with a FLAC decoder (QOACONV_HAS_DRFLAC)");
-		#endif
+		sample_data = qoaconv_flac_read(argv[1], &desc);
 	}
 	else if (QOACONV_STR_ENDS_WITH(argv[1], ".qoa")) {
 		sample_data = qoa_read(argv[1], &desc);
