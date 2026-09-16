@@ -1,8 +1,8 @@
-![QOA Logo](https://qoaformat.org/qoa-logo-new.svg)
+# P3D QOA - The “Quite OK Audio Format”
 
-# QOA - The “Quite OK Audio Format” for fast, lossy audio compression
+*A fork of https://github.com/phoboslab/qoa designed for BlocksDS, maintained by The P3D Project*
 
-Single-file MIT licensed library for C/C++
+Single-file library for C/C++
 
 See [qoa.h](https://github.com/phoboslab/qoa/blob/master/qoa.h) for
 the documentation and format specification.
@@ -11,9 +11,30 @@ More info at: https://qoaformat.org
 
 Audio samples in WAV & QOA format can be found at: https://qoaformat.org/samples/
 
-
 ⚠️ This implementation has not yet been fuzzed. Don't use it with untrusted input.
 
+![QOA Logo](https://qoaformat.org/qoa-logo-new.svg)
+
+> Want to help? Join the [Discord!](https://discord.gg/CQnkc5gS6a) Any help, big or small, would be greatly appreciated!
+
+![Stars](https://img.shields.io/github/stars/p3d-project/p3d-qoa?style=flat-square&color=gold)
+![Forks](https://img.shields.io/github/forks/p3d-project/p3d-qoa?style=flat-square&color=blue)
+![Last Commit](https://img.shields.io/github/last-commit/p3d-project/p3d-qoa?style=flat-square&color=green)
+![License](https://img.shields.io/badge/license-MIT-red)
+![License](https://img.shields.io/badge/license-CC_BY--NC--SA_4.0-red)
+
+![C](https://img.shields.io/badge/C-A8B9CC?logo=C&logoColor=white)
+
+[![Discord](https://img.shields.io/discord/1498850477545357482?label=Discord&logo=discord&style=flat-square&color=5865F2)](https://discord.gg/CQnkc5gS6a)
+
+---
+
+## Batteries Included (Dependencies)
+
+p3d-qoa bundles its dependencies under /libs, which are the following:
+
+1. **[dr_libs](https://github.com/mackron/dr_libs)**
+* Used for file conversion to QOA.
 
 ## Compiling
 
@@ -30,35 +51,27 @@ curl https://raw.githubusercontent.com/mackron/dr_libs/refs/heads/master/dr_flac
 make HAS_DRLIBS=true
 ```
 
+---
 
-## Alternative Implementations of QOA
+![Alt](https://repobeats.axiom.co/api/embed/c2ac4daf95116f988569aeacbc4d34a373154b21.svg "Repobeats analytics image")
 
-- [pfusik/qoa-fu](https://github.com/pfusik/qoa-fu) - Fusion, transpiling to
-[C](https://github.com/pfusik/qoa-fu/blob/master/transpiled/QOA.c),
-[C++](https://github.com/pfusik/qoa-fu/blob/master/transpiled/QOA.cpp),
-[C#](https://github.com/pfusik/qoa-fu/blob/master/transpiled/QOA.cs),
-[D](https://github.com/pfusik/qoa-fu/blob/master/transpiled/QOA.d),
-[Java](https://github.com/pfusik/qoa-fu/blob/master/transpiled/QOADecoder.java),
-[JavaScript](https://github.com/pfusik/qoa-fu/blob/master/transpiled/QOA.js),
-[Python](https://github.com/pfusik/qoa-fu/blob/master/transpiled/QOA.py),
-[Swift](https://github.com/pfusik/qoa-fu/blob/master/transpiled/QOA.swift)
-and [TypeScript](https://github.com/pfusik/qoa-fu/blob/master/transpiled/QOA.ts)
-- [qoa-format](https://github.com/mattdesl/qoa-format) - JavaScript encoder/decoder
-- [JohannesFriedrich/qoa4R](https://github.com/JohannesFriedrich/qoa4R) - R
-- [rafaelcaricio/qoaudio](https://github.com/rafaelcaricio/qoaudio) - Pure Rust zero-dependency decoder implementation
-- [AuburnSounds/audio-formats](https://github.com/AuburnSounds/audio-formats) - D library, supports QOA
-- [braheezy/goqoa](https://github.com/braheezy/goqoa) - Go library and CLI tool
-- [HaxelWorks/qoa-python](https://github.com/HaxelWorks/qoa-python) - Python wrapper using cffi
-- [Cl Qoa](https://shinmera.github.io/cl-qoa/) - Common Lisp
-- [Resona QOA](https://github.com/MatusOllah/resona/tree/main/codec/qoa) - Pure Go decoder and encoder implementation
+---
 
-## QOA Support in Other Software
+## Legal
+### License
+The original source code is licensed under the **MIT License**. Copyright (c) 2023 Dominic Szablewski
 
-- [Godot Engine](https://godotengine.org) - supports compressing WAV files into QOA since 4.3
-- [raylib](https://github.com/raysan5/raylib) - supports decoding QOA samples through its [raudio module](https://github.com/raysan5/raylib/blob/master/src/raudio.c)
-- [SerenityOS](https://github.com/SerenityOS/serenity) supports QOA system wide through [QOALoader.h](https://github.com/SerenityOS/serenity/blob/master/Userland/Libraries/LibAudio/QOALoader.h)
-- [Qmmp](https://github.com/TTK-qmmp/qmmp-qoa) - supports decoding QOA samples
-- [Visual Studio Code](https://github.com/microsoft/vscode): supports playing QOA files with the [QOA Preview extension](https://github.com/braheezy/vscode-qoa-preview)
-- [OpenCubicPlayer](https://github.com/mywave82/opencubicplayer) - supports playing QOA files
-- [file](https://github.com/file/file): identify QOA files
-  
+Changes to the source code are licensed under the Creative Commons **Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0).**
+
+This license means:
+
+- **Attribution (BY)**: You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+- **NonCommercial (NC)**: You may not utilize this repo for commercial purposes.
+- **ShareAlike (SA)**: If you remix, transform, or build upon the repo, you must distribute your contributions under the same license as the original.
+
+### Libraries
+**[dr_libs](https://github.com/mackron/dr_libs)**
+- Copyright © 2020m David Reid
+- Licensed under the MIT No Attribution License
+
+If you want to use the repo in a commercial application, contact thep3dproject@gmail.com for solutions.
