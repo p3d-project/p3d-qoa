@@ -14,29 +14,7 @@ ifeq ($(HAS_DRLIBS), true)
 	CFLAGS_CONV := $(CFLAGS_CONV) -D QOACONV_HAS_DRMP3 -D QOACONV_HAS_DRFLAC
 endif
 
-# QOAPLAY
-# Requires
-# - https://github.com/floooh/sokol/blob/master/sokol_audio.h
-# FIXME: not yet tested on Windows/macOS
-TARGET_PLAY ?= qoaplay
-CFLAGS_PLAY ?= -std=gnu99 -O3
-
-ifeq ($(OS),Windows_NT)
-	LFLAGS_PLAY ?= # defined in #pragma() in sokol_audio.h
-else
-	UNAME_S := $(shell uname -s)
-	ifeq ($(UNAME_S),Darwin)
-		LFLAGS_PLAY ?= -pthread -framework AudioToolbox
-	else
-		LFLAGS_PLAY ?= -pthread -lasound
-	endif
-endif
-
-all: $(TARGET_PLAY) $(TARGET_CONV)
-
-play: $(TARGET_PLAY)
-$(TARGET_PLAY):$(TARGET_PLAY).c qoa.h
-	$(CC) $(CFLAGS_PLAY) $(TARGET_PLAY).c -o $(TARGET_PLAY) $(LFLAGS_PLAY)
+all: $(TARGET_CONV)
 
 conv: $(TARGET_CONV)
 $(TARGET_CONV):$(TARGET_CONV).c qoa.h
@@ -44,4 +22,4 @@ $(TARGET_CONV):$(TARGET_CONV).c qoa.h
 
 .PHONY: clean
 clean:
-	$(RM) $(TARGET_PLAY) $(TARGET_CONV)
+	$(RM) $(TARGET_CONV)
