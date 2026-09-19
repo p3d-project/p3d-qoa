@@ -168,6 +168,7 @@ extern "C"
 
 #ifdef QOA_IMPLEMENTATION
 #include <stdlib.h>
+#include <stdint.h>
 
 #ifndef QOA_MALLOC
 #define QOA_MALLOC(sz) malloc(sz)
