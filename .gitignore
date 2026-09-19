@@ -2,3 +2,4 @@ tests/
 dr_flac.h
 dr_mp3.h
 qoaconv
+/out
