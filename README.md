@@ -53,7 +53,7 @@ make HAS_DRLIBS=true
 
 ---
 
-![Alt](https://repobeats.axiom.co/api/embed/c2ac4daf95116f988569aeacbc4d34a373154b21.svg "Repobeats analytics image")
+![Repobeats analytics image](https://repobeats.axiom.co/api/embed/c2ac4daf95116f988569aeacbc4d34a373154b21.svg)
 
 ---
 
