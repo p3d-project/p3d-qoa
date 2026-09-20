@@ -71,7 +71,7 @@ This license means:
 
 ### Libraries
 **[dr_libs](https://github.com/mackron/dr_libs)**
-- Copyright © 2020m David Reid
+- Copyright © 2020, David Reid
 - Licensed under the MIT No Attribution License
 
 If you want to use the repo in a commercial application, contact thep3dproject@gmail.com for solutions.
